@@ -11,6 +11,9 @@ def merge(intervals: tuple) -> list:
     The remaining intervals keep untouched.
     """
     try:
+        if not isinstance(intervals, list):
+            raise TypeError("Intervals is not a list!")
+
         # Sorting intervals to make max interval last entry
         intervals.sort()
         result = [intervals[0]]
@@ -33,6 +36,9 @@ def merge(intervals: tuple) -> list:
 
         result.sort()
         return result
+    
+    except TypeError as err:
+        return f"TypeError: {err}"
 
     except Exception as err:
         return f"Error: {err}"
