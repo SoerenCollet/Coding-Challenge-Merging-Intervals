@@ -25,6 +25,15 @@ Jetzt können die benötigten Module installiert werden (Aktuelle Versionsständ
 (venv) >> pip install -r requirements.txt
 ```
 
+## Tests
+
+Für das Testing wird in diesem Projekt **pytest** verwendet. Die Tests liegen im Verzeichnis **tests** ab.
+
+Sie können über folgenden Befehl ausgeführt werden:
+```
+(venv) >> python -m pytest python/tests
+```
+
 ## Überlegungen
 
 ### Versuch 1
