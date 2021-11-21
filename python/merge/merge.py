@@ -76,7 +76,7 @@ def merge(intervals: tuple) -> list:
 if __name__ == "__main__":
     args = get_args()
 
-    if args.timer is True: 
+    if args.timer is True:
         start = timeit.default_timer()
 
     match args:
@@ -85,11 +85,11 @@ if __name__ == "__main__":
         case args if args.example is not None:
             print(merge(args.example))
         case args if args.timer is True:
-            print("Please profide further arguments, running a timer without executed code is meaningless!")
+            print("Please profide further arguments, " +
+                "running a timer without executed code is meaningless!")
         case _:
             print("Please profide arguments!")
 
     if args.timer is True:
         end = timeit.default_timer()
         print(end-start)
-
