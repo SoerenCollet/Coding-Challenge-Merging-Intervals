@@ -34,6 +34,12 @@ Sie können über folgenden Befehl ausgeführt werden:
 (venv) >> python -m pytest python/tests
 ```
 
+## Speicherverbrauch
+
+Um den Speicherverbrauch des Programms zu überprüfen, wird das Modul **memory-profiler** verwendet.
+
+Dazu ist es erforderlich, die Funktion, welche in das Monitoring des Speicherverbrauchs, 
+
 ## Überlegungen
 
 ### Versuch 1
@@ -63,3 +69,9 @@ Es gibt in Python zwar Libraries für numerische Operationen (Pandas, NumPy), al
         IN: [25,30],[2,19],[14,23],[4,8]]
         OUT: [[2,23],[25,30]]
         ```
+- Test 2: Richtiger Parametertyp
+    - Funktion **merge** wirft den gewünschten Fehler aus, wenn etwas anderes als eine _list_ als Parameter für **intervals** verwendet wird:
+        ```
+        TypeError: Intervals is not a list!
+        ```
+        Allerdings muss aktuell noch das Argument im File angegeben werden, statt als Argument in der CLI.
