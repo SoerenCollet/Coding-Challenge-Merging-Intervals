@@ -1,9 +1,31 @@
 """
-the merge function of the challenge
+The merge function of the challenge
 
 Functions:
+    get_args() -> argparse.Namespace
     merge(tuple) -> list
 """
+import argparse
+
+def get_args() -> argparse.Namespace:
+    """Getting user args from cli"""
+    cli=argparse.ArgumentParser()
+    cli.add_argument(
+        "--intervals",
+        "-i",
+        nargs="+",
+        type=int,
+        action="append",
+        help="Add min 2 intervals to get merged (-i 2 6 -i 3 10)"
+    )
+    cli.add_argument(
+        "--example",
+        "-e",
+        nargs="?",
+        const=[[25,30],[2,19],[14,23],[4,8]]
+    )
+    return cli.parse_args()
+
 def merge(intervals: tuple) -> list:
     """
     The merge function accepts a list of intervals and returns a list of intervals.
@@ -19,7 +41,7 @@ def merge(intervals: tuple) -> list:
         result = [intervals[0]]
 
         # Compare last entry of results with iterated interval
-        for index, interval in enumerate(intervals):
+        for interval in intervals:
             last_index = len(result)-1
             last_value = result[last_index]
             if (interval[0] <= last_value[0] <= interval[1]) or \
@@ -36,13 +58,20 @@ def merge(intervals: tuple) -> list:
 
         result.sort()
         return result
-    
+
     except TypeError as err:
         return f"TypeError: {err}"
 
     except Exception as err:
         return f"Error: {err}"
 
-
 if __name__ == "__main__":
-    print(merge([[25,30],[2,19],[14,23],[4,8]]))
+    args = get_args()
+    match args:
+        case args if args.intervals is not None:
+            print(merge(args.intervals))
+        case args if args.example is not None:
+            print(merge(args.example))
+        case _:
+            print("Please profide arguments!")
+
