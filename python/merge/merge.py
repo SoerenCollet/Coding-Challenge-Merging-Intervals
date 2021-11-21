@@ -45,11 +45,12 @@ def merge(intervals: tuple) -> list:
             raise TypeError("Intervals is not a list!")
 
         # Sorting intervals to make max interval last entry
-        intervals.sort()
-        result = [intervals[0]]
+        intervalsCopy = list(intervals)
+        intervalsCopy.sort()
+        result = [intervalsCopy[0]]
 
         # Compare last entry of results with iterated interval
-        for interval in intervals:
+        for interval in intervalsCopy:
             last_index = len(result)-1
             last_value = result[last_index]
             if (interval[0] <= last_value[0] <= interval[1]) or \
