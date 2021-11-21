@@ -57,6 +57,21 @@ Da im Beispiel nur positive Intervalle verwendet wurden, wird zuerst der Code au
 
 Es gibt in Python zwar Libraries für numerische Operationen (Pandas, NumPy), allerdings möchte ich zuerst die Methode ohne weitere Libraries versuchen um so die Ergebnisse, was Laufzeit und Performance angeht, später vergleichen zu können.
 
+#### Lösungsansatz
+
+Am Beispiel aus der Challenge habe ich versucht, einen Weg ohne zusätzliche Libraries zu probieren - daher lediglich mit Loops & Clauses.
+
+Da die eigentliche Liste der **intervals** nicht veränderbar sein darf, habe ich den Parameter als _tuple_ deklariert.
+Die Ergebnisse müssen daher in eine separate Liste geschrieben werden, die ich **result** genannt und als _list_ deklariert habe.
+
+Damit ich nicht Werte aus einer Liste löschen muss, die mittendrin gespeichert sind und daher eine Verschiebung des Index nach sich ziehen würden, habe ich mich dafür entschieden, die eingehenden **intervals** in eine Liste **intervalsCopy** zu kopieren und diese aufsteigend zu sortieren.
+
+Der kleinste Wert wird als erster Eintrag in **result** gespeichert und damit anfangend gegen die sortierten Intervalle aus der Kopie verglichen. Befindet sich der Anfangs- oder Endwert des Intervals in dem letzten Eintrag von **result** (daher: sie überlappen), wird das Intervall gemerged und als neuer Wert an die Liste angehängt.
+
+Überschneidet sich das Interval nicht mit dem letzten Eintrag von **result**, wird dieser als neuer, letzter Eintrag angehängt.
+
+Da das Ergebnis aus dem Beispiel auch sortiert zu sein scheint, wird nach dem Loop das Ergebnis entsprechend sortiert, bevor es zurückgegeben wird.
+
 #### Vorgang
 
 - Test 1: Beispiel aus der Challenge
@@ -76,7 +91,7 @@ Es gibt in Python zwar Libraries für numerische Operationen (Pandas, NumPy), al
     - Funktion **merge** liefert nach Eingabe von dem in der Challenge beschriebenen Beispiel das richtige Ergebnis:
 
         ```
-        IN: [25,30],[2,19],[14,23],[4,8]]
+        IN: [[25,30],[2,19],[14,23],[4,8]]
         OUT: [[2,23],[25,30]]
         ```
 - Test 2: Richtiger Parametertyp
