@@ -10,8 +10,9 @@ packaging==21.3
 platformdirs==2.4.0
 pluggy==1.0.0
 py==1.11.0
+pylint==2.11.1
 pyparsing==3.0.6
 pytest==6.2.5
 toml==0.10.2
-typing-extensions==4.0.0
+typing_extensions==4.0.0
 wrapt==1.13.3
