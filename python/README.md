@@ -59,6 +59,10 @@ Es gibt in Python zwar Libraries für numerische Operationen (Pandas, NumPy), al
 - Test 2: Richtiger Parametertyp
     - Testfunktion, welche einen Error wirft, wenn _intervals_ keine _list_ ist
     - Funktion merge erweitern um einen TypeError raise
+- Test 3: Negative Intevalle
+    - Testfunktion, welche negative Intervalle merged
+    - Funktion testen und gegebenenfalls erweitern
+    - Funktion erweitern, sodass Argumente per CLI übergeben werden können
 
 #### Ergebnis 
 
@@ -75,3 +79,7 @@ Es gibt in Python zwar Libraries für numerische Operationen (Pandas, NumPy), al
         TypeError: Intervals is not a list!
         ```
         Allerdings muss aktuell noch das Argument im File angegeben werden, statt als Argument in der CLI.
+        
+- Test 3: Negative Intervalle
+    - Funktion **merge** kann ohne weitere Modifikation negative Intervalle verarbeiten und mergen.
+    - Argumente können jetzt per CLI übergeben werden
