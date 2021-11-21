@@ -46,6 +46,10 @@ Um den Speicherverbrauch des Programms zu überprüfen, wird das Modul **memory-
 
 Dazu ist es erforderlich, die Funktion, welche in das Monitoring des Speicherverbrauchs, 
 
+***Anmerkung:*** 
+
+**psutil**, welches im angedachten Modul **memory-profiler** verwendet wird, hat aktuell keinen Wheel für um ihn unter Windows mit Python **3.10.0** installieren zu können (siehe: https://issueexplorer.com/issue/giampaolo/psutil/1994).
+
 ## Überlegungen
 
 ### Versuch 1
