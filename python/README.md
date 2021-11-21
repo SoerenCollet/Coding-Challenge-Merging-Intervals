@@ -28,10 +28,16 @@ Jetzt können die benötigten Module installiert werden (Aktuelle Versionsständ
 ## Tests
 
 Für das Testing wird in diesem Projekt **pytest** verwendet. Die Tests liegen im Verzeichnis **tests** ab.
+Die Konfiguration der Tests wird im File **tests/pytest.ini** vorgenommen.
 
-Sie können über folgenden Befehl ausgeführt werden:
+Die Tests können durch folgenden Befehl durchgeführt werden:
 ```
-(venv) >> python -m pytest python/tests
+(venv) >> python -m pytest
+```
+
+Desweiteren wird das Linting des Codes mit **pylint** überprüft. Dies kann durch folgenden Befehl getestet werden:
+```
+(venv) >> python -m pylint python/merge
 ```
 
 ## Speicherverbrauch
@@ -47,7 +53,7 @@ Dazu ist es erforderlich, die Funktion, welche in das Monitoring des Speicherver
 Zuerst wird ein einfacher Test geschrieben, der überprüft, ob die Funktion **merge** das Beispiel der Challenge richtig zurückgeben kann.
 
 Dabei ist zu beachten, dass die Intervalle scheinbar sortiert zurückgebeben werden müssen (sortiert nach kleinstem Startwert).
-Da im Beispiel nur positive Intervalle verwendet wurden, wird zuerst der Code auf diesen Anwendungsfall hin entwickelt.
+Da im Beispiel nur positive Intervalle verwendet wurden, wird zuerst der Code auf diesen Anwendungsfall hin entwickelt, später allerdings mit weiteren Tests auch darauf überprüft.
 
 Es gibt in Python zwar Libraries für numerische Operationen (Pandas, NumPy), allerdings möchte ich zuerst die Methode ohne weitere Libraries versuchen um so die Ergebnisse, was Laufzeit und Performance angeht, später vergleichen zu können.
 
