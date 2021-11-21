@@ -4,6 +4,27 @@
 
 Es wird nach TDD (Test Driven Development) entwickelt.
 
+## Initialisierung
+
+In diesem Projekt wird Python in der Version **3.10.0** verwendet.
+
+Um das Projekt ausführen zu können, muss ein virtual environment mit folgendem Befehl ausgerollt werden:
+
+```
+>> cd python
+>> python -m venv venv
+```
+
+Um das Virtual environment nutzen zu können, wird das entsprechende Activate-Script verwendet:
+```
+>> . venv/Scripts/activate
+```
+
+Jetzt können die benötigten Module installiert werden (Aktuelle Versionsstände stehen im File **requirements.txt**):
+```
+(venv) >> pip install -r requirements.txt
+```
+
 ## Überlegungen
 
 ### Versuch 1
