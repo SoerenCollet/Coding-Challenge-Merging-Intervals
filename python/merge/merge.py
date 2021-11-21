@@ -6,6 +6,7 @@ Functions:
     merge(tuple) -> list
 """
 import argparse
+import timeit
 
 def get_args() -> argparse.Namespace:
     """Getting user args from cli"""
@@ -22,7 +23,14 @@ def get_args() -> argparse.Namespace:
         "--example",
         "-e",
         nargs="?",
-        const=[[25,30],[2,19],[14,23],[4,8]]
+        const=[[25,30],[2,19],[14,23],[4,8]],
+        help="Shows the challenge example"
+    )
+    cli.add_argument(
+        "--timer",
+        "-t",
+        action='store_true',
+        help="Returns execution time"
     )
     return cli.parse_args()
 
@@ -67,11 +75,21 @@ def merge(intervals: tuple) -> list:
 
 if __name__ == "__main__":
     args = get_args()
+
+    if args.timer is True: 
+        start = timeit.default_timer()
+
     match args:
         case args if args.intervals is not None:
             print(merge(args.intervals))
         case args if args.example is not None:
             print(merge(args.example))
+        case args if args.timer is True:
+            print("Please profide further arguments, running a timer without executed code is meaningless!")
         case _:
             print("Please profide arguments!")
+
+    if args.timer is True:
+        end = timeit.default_timer()
+        print(end-start)
 
