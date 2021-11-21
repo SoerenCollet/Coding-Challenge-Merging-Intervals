@@ -44,3 +44,22 @@ Dabei ist zu beachten, dass die Intervalle scheinbar sortiert zurückgebeben wer
 Da im Beispiel nur positive Intervalle verwendet wurden, wird zuerst der Code auf diesen Anwendungsfall hin entwickelt.
 
 Es gibt in Python zwar Libraries für numerische Operationen (Pandas, NumPy), allerdings möchte ich zuerst die Methode ohne weitere Libraries versuchen um so die Ergebnisse, was Laufzeit und Performance angeht, später vergleichen zu können.
+
+#### Vorgang
+
+- Test 1: Beispiel aus der Challenge
+    - Testfunktion, welche das Beispiel aus der Challenge überprüft
+    - Funktion merge, um die Testfunktion zu bestehen
+- Test 2: Richtiger Parametertyp
+    - Testfunktion, welche einen Error wirft, wenn _intervals_ keine _list_ ist
+    - Funktion merge erweitern um einen TypeError raise
+
+#### Ergebnis 
+
+- Test 1: Beispiel aus der Challenge
+    - Funktion **merge** liefert nach Eingabe von dem in der Challenge beschriebenen Beispiel das richtige Ergebnis:
+
+        ```
+        IN: [25,30],[2,19],[14,23],[4,8]]
+        OUT: [[2,23],[25,30]]
+        ```
