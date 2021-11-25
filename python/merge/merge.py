@@ -103,19 +103,19 @@ if __name__ == "__main__":
             # Handle user inputs and provide feedback
             match args:
                 case args if args.intervals is not None:
-                    console.print("[green underline]Status: done!\n\n")
                     console.print(f"Merged intervals:\n{merge(args.intervals)}")
+                    console.print("[green underline]Status: done!\n\n")
                 case args if args.example is not None:
-                    console.print("[green underline]Status: done!\n\n")
                     console.print(f"Merged intervals:\n{merge(args.example)}")
-                case args if args.timer is True:
                     console.print("[green underline]Status: done!\n\n")
+                case args if args.timer is True:
                     console.print("Please provide further arguments, " +
                         "enter intervals or start the example for valid runtime!")
-                case args if args.memory is True:
                     console.print("[green underline]Status: done!\n\n")
+                case args if args.memory is True:
                     console.print("Please provide further arguments, " +
                         "enter intervals or start the example for valid memory usage!")
+                    console.print("[green underline]Status: done!\n\n")
                 case _:
                     console.print("Please provide arguments!")
 
