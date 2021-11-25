@@ -6,8 +6,8 @@ Functions:
     merge(tuple) -> list
 """
 import argparse
-from rich.console import Console
 from timeit import default_timer as timer
+from rich.console import Console
 from guppy import hpy
 
 
