@@ -6,6 +6,7 @@ Functions:
     merge(tuple) -> list
 """
 import argparse
+from rich.console import Console
 from timeit import default_timer as timer
 from guppy import hpy
 
@@ -48,76 +49,85 @@ def merge(intervals: tuple) -> list:
     The returning intervals are the intervals which overlapps.
     The remaining intervals keep untouched.
     """
-    try:
-        if not isinstance(intervals, list):
-            raise TypeError("Intervals is not a list!")
+    if not isinstance(intervals, list):
+        raise TypeError("Intervals is not a list!")
 
-        if not len(intervals) >= 2:
-            raise ValueError("Please provide at least 2 intervals to merge!")
+    if not len(intervals) >= 2:
+        raise ValueError("Please provide at least 2 intervals to merge!")
 
-        # Sorting intervals to make max starting interval last entry
-        intervals_copy = list(intervals)
-        intervals_copy.sort(key=lambda interval:interval[0])
-        result = [intervals_copy[0]]
+    # Sorting intervals to make max starting interval last entry
+    intervals_copy = list(intervals)
+    intervals_copy.sort(key=lambda interval:interval[0])
+    result = [intervals_copy[0]]
 
-        for interval in intervals_copy:
-            if len(interval) != 2:
-                raise ValueError("Please provide valid intervals!" \
-                    "\nAn interval has exact 2 values.")
+    for interval in intervals_copy:
+        if len(interval) != 2:
+            raise ValueError("Please provide valid intervals!" \
+                "\nAn interval has exact 2 values.")
 
-            if interval[0] > interval[1]:
-                raise ValueError("Please provide valid intervals!" \
-                    "\nThe starting interval should not be higher then the ending interval.")
+        if interval[0] > interval[1]:
+            raise ValueError("Please provide valid intervals!" \
+                "\nThe starting interval should not be higher then the ending interval.")
 
-            # Compare last entry of results with iterated interval
-            last_index = len(result)-1
-            last_value = result[last_index]
-            if (interval[0] <= last_value[0] <= interval[1]) or \
-                (interval[0] <= last_value[1] <= interval[1]) or \
-                (last_value[0] <= interval[0] <= last_value[1]) or \
-                (last_value[0] <= interval[1] <= last_value[1]):
+        # Compare last entry of results with iterated interval
+        last_index = len(result)-1
+        last_value = result[last_index]
+        if (interval[0] <= last_value[0] <= interval[1]) or \
+            (interval[0] <= last_value[1] <= interval[1]) or \
+            (last_value[0] <= interval[0] <= last_value[1]) or \
+            (last_value[0] <= interval[1] <= last_value[1]):
 
-                # Replace last entry with merged overlapping interval
-                result.pop(last_index)
-                merged_intervals = interval[0:] + last_value[0:]
-                result.append([min(merged_intervals), max(merged_intervals)])
-            else:
-                result.append(interval)
+            # Replace last entry with merged overlapping interval
+            result.pop(last_index)
+            merged_intervals = interval[0:] + last_value[0:]
+            result.append([min(merged_intervals), max(merged_intervals)])
+        else:
+            result.append(interval)
 
-        result.sort(key=lambda interval:interval[0])
-        return result
-
-    except TypeError as err:
-        return f"TypeError: {err}"
-
-    except ValueError as err:
-        return f"ValueError: {err}"
+    result.sort(key=lambda interval:interval[0])
+    return result
 
 if __name__ == "__main__":
-    mem = hpy()
-    args = get_args()
+    try:
+        console = Console()
+        # Starting context manager for user feedback
+        with console.status("[bold green]Working on tasks...") as status:
+            mem = hpy()
+            args = get_args()
 
-    if args.timer is True:
-        start = timer()
+            console.print("[green underline]Status: merging intervals")
 
-    # Handle user inputs and provide feedback
-    match args:
-        case args if args.intervals is not None:
-            print(f"Merged intervals:\n{merge(args.intervals)}")
-        case args if args.example is not None:
-            print(f"Merged intervals:\n{merge(args.example)}")
-        case args if args.timer is True:
-            print("Please provide further arguments, " +
-                "enter intervals or start the example for valid runtime!")
-        case args if args.memory is True:
-            print("Please provide further arguments, " +
-                "enter intervals or start the example for valid memory usage!")
-        case _:
-            print("Please provide arguments!")
+            if args.timer is True:
+                start = timer()
 
-    if args.timer is True:
-        end = timer()
-        print(f"\nRuntime:\n{end-start} seconds")
+            # Handle user inputs and provide feedback
+            match args:
+                case args if args.intervals is not None:
+                    console.print("[green underline]Status: done!\n\n")
+                    console.print(f"Merged intervals:\n{merge(args.intervals)}")
+                case args if args.example is not None:
+                    console.print("[green underline]Status: done!\n\n")
+                    console.print(f"Merged intervals:\n{merge(args.example)}")
+                case args if args.timer is True:
+                    console.print("[green underline]Status: done!\n\n")
+                    console.print("Please provide further arguments, " +
+                        "enter intervals or start the example for valid runtime!")
+                case args if args.memory is True:
+                    console.print("[green underline]Status: done!\n\n")
+                    console.print("Please provide further arguments, " +
+                        "enter intervals or start the example for valid memory usage!")
+                case _:
+                    console.print("Please provide arguments!")
 
-    if args.memory is True:
-        print(f"\nCurrent memory heap:\n{mem.heap().size} bytes")
+            if args.timer is True:
+                end = timer()
+                console.print(f"\nRuntime:\n{end-start} seconds")
+
+            if args.memory is True:
+                console.print(f"\nCurrent memory heap:\n{mem.heap().size} bytes")
+
+    except TypeError as err:
+        console.print(f"[red underline]TypeError: {err}")
+
+    except ValueError as err:
+        console.print(f"[red underline]ValueError: {err}")
