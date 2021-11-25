@@ -95,7 +95,7 @@ if __name__ == "__main__":
             mem = hpy()
             args = get_args()
 
-            console.print("[green underline]Status: merging intervals")
+            console.print("[green underline]Status: merging intervals\n")
 
             if args.timer is True:
                 start = timer()
@@ -103,19 +103,19 @@ if __name__ == "__main__":
             # Handle user inputs and provide feedback
             match args:
                 case args if args.intervals is not None:
-                    console.print("[green underline]Status: done!\n\n")
                     console.print(f"Merged intervals:\n{merge(args.intervals)}")
+                    console.print("\n[green underline]Status: done!")
                 case args if args.example is not None:
-                    console.print("[green underline]Status: done!\n\n")
                     console.print(f"Merged intervals:\n{merge(args.example)}")
+                    console.print("\n[green underline]Status: done!")
                 case args if args.timer is True:
-                    console.print("[green underline]Status: done!\n\n")
                     console.print("Please provide further arguments, " +
                         "enter intervals or start the example for valid runtime!")
+                    console.print("\n[green underline]Status: done!")
                 case args if args.memory is True:
-                    console.print("[green underline]Status: done!\n\n")
                     console.print("Please provide further arguments, " +
                         "enter intervals or start the example for valid memory usage!")
+                    console.print("\n[green underline]Status: done!")
                 case _:
                     console.print("Please provide arguments!")
 
