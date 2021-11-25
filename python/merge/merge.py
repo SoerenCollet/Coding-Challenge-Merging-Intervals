@@ -6,7 +6,9 @@ Functions:
     merge(tuple) -> list
 """
 import argparse
-import timeit
+from timeit import default_timer as timer
+from guppy import hpy
+
 
 def get_args() -> argparse.Namespace:
     """Getting user args from cli"""
@@ -32,6 +34,12 @@ def get_args() -> argparse.Namespace:
         action='store_true',
         help="Returns execution time"
     )
+    cli.add_argument(
+        "--memory",
+        "-m",
+        action='store_true',
+        help="Returns memory usage"
+    )
     return cli.parse_args()
 
 def merge(intervals: tuple) -> list:
@@ -44,13 +52,24 @@ def merge(intervals: tuple) -> list:
         if not isinstance(intervals, list):
             raise TypeError("Intervals is not a list!")
 
-        # Sorting intervals to make max interval last entry
-        intervalsCopy = list(intervals)
-        intervalsCopy.sort()
-        result = [intervalsCopy[0]]
+        if not len(intervals) >= 2:
+            raise ValueError("Please provide at least 2 intervals to merge!")
 
-        # Compare last entry of results with iterated interval
-        for interval in intervalsCopy:
+        # Sorting intervals to make max starting interval last entry
+        intervals_copy = list(intervals)
+        intervals_copy.sort(key=lambda interval:interval[0])
+        result = [intervals_copy[0]]
+
+        for interval in intervals_copy:
+            if len(interval) != 2:
+                raise ValueError("Please provide valid intervals!" \
+                    "\nAn interval has exact 2 values.")
+
+            if interval[0] > interval[1]:
+                raise ValueError("Please provide valid intervals!" \
+                    "\nThe starting interval should not be higher then the ending interval.")
+
+            # Compare last entry of results with iterated interval
             last_index = len(result)-1
             last_value = result[last_index]
             if (interval[0] <= last_value[0] <= interval[1]) or \
@@ -65,32 +84,40 @@ def merge(intervals: tuple) -> list:
             else:
                 result.append(interval)
 
-        result.sort()
+        result.sort(key=lambda interval:interval[0])
         return result
 
     except TypeError as err:
         return f"TypeError: {err}"
 
-    except Exception as err:
-        return f"Error: {err}"
+    except ValueError as err:
+        return f"ValueError: {err}"
 
 if __name__ == "__main__":
+    mem = hpy()
     args = get_args()
 
     if args.timer is True:
-        start = timeit.default_timer()
+        start = timer()
 
+    # Handle user inputs and provide feedback
     match args:
         case args if args.intervals is not None:
-            print(merge(args.intervals))
+            print(f"Merged intervals:\n{merge(args.intervals)}")
         case args if args.example is not None:
-            print(merge(args.example))
+            print(f"Merged intervals:\n{merge(args.example)}")
         case args if args.timer is True:
-            print("Please profide further arguments, " +
-                "running a timer without executed code is meaningless!")
+            print("Please provide further arguments, " +
+                "enter intervals or start the example for valid runtime!")
+        case args if args.memory is True:
+            print("Please provide further arguments, " +
+                "enter intervals or start the example for valid memory usage!")
         case _:
-            print("Please profide arguments!")
+            print("Please provide arguments!")
 
     if args.timer is True:
-        end = timeit.default_timer()
-        print(end-start)
+        end = timer()
+        print(f"\nRuntime:\n{end-start} seconds")
+
+    if args.memory is True:
+        print(f"\nCurrent memory heap:\n{mem.heap().size} bytes")
