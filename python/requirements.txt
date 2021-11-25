@@ -2,6 +2,7 @@ astroid==2.8.5
 atomicwrites==1.4.0
 attrs==21.2.0
 colorama==0.4.4
+guppy3==3.1.2
 iniconfig==1.1.1
 isort==5.10.1
 lazy-object-proxy==1.6.0
