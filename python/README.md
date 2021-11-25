@@ -8,22 +8,33 @@ Es wird nach TDD (Test Driven Development) entwickelt.
 
 In diesem Projekt wird Python in der Version **3.10.0** verwendet.
 
-Um das Projekt ausführen zu können, muss ein virtual environment mit folgendem Befehl ausgerollt werden:
+Um das Projekt ausführen zu können, muss das Projekt zuerst gecloned werden:
 
 ```
->> cd python
+>> git clone https://i.imgur.com/joMBvg2.gif
+>> cd Coding-Challenge-Merging-Intervals/python
+```
+
+Danach wird mit folgendem Befehl ein Virtual Environment angelegt:
+
+```
 >> python -m venv venv
 ```
 
 Um das Virtual environment nutzen zu können, wird das entsprechende Activate-Script verwendet:
 ```
 >> . venv/Scripts/activate
+
+# MacOS
+>> . venv/bin/activate
 ```
 
 Jetzt können die benötigten Module installiert werden (Aktuelle Versionsstände stehen im File **requirements.txt**):
 ```
-(venv) >> pip install -r requirements.txt
+(venv) 
+>> pip install -r requirements.txt
 ```
+![Installing](https://i.imgur.com/8g0ERp2.gif)
 
 ## Tests
 
@@ -39,6 +50,7 @@ Desweiteren wird das Linting des Codes mit **pylint** überprüft. Dies kann dur
 ```
 (venv) >> python -m pylint python/merge
 ```
+![Testing](https://i.imgur.com/eQjUJJN.gif)
 
 ## Laufzeit
 
@@ -169,7 +181,8 @@ Da das Ergebnis aus dem Beispiel auch sortiert zu sein scheint, wird nach dem Lo
     - Der Testlauf dauert 10 Sekunden mit einer Anzahl von 1000000 Intervallen
     - Speicherverbrauch steigt nicht an während der Laufzeit
     - Der User benötigt ein Feedback, damit er weiß, dass das Programm noch lauffähig ist. Daher wurde ein Spinner integriert, der durch einen context manager verwaltet wird. So ist der Status des aktuellen Laufs für den User nachvollziehbarer und damit die Robustheit des Programms erhöht
-    ![Merging many intervals](https://i.imgur.com/G9dlvxL.gif)
+
+    ![Merging many intervals](https://i.imgur.com/f3L1MNL.gif)
 
 - **Test 8**: Großer Intervallbereich
     - Der Test läuft unter einer Sekunde erfolgreich durch
