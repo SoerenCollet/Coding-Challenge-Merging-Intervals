@@ -2,6 +2,7 @@ astroid==2.8.5
 atomicwrites==1.4.0
 attrs==21.2.0
 colorama==0.4.4
+commonmark==0.9.1
 guppy3==3.1.2
 iniconfig==1.1.1
 isort==5.10.1
@@ -11,9 +12,11 @@ packaging==21.3
 platformdirs==2.4.0
 pluggy==1.0.0
 py==1.11.0
+Pygments==2.10.0
 pylint==2.11.1
 pyparsing==3.0.6
 pytest==6.2.5
+rich==10.14.0
 toml==0.10.2
 typing_extensions==4.0.0
 wrapt==1.13.3
