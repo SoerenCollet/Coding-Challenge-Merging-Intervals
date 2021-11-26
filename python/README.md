@@ -11,7 +11,7 @@ In diesem Projekt wird Python in der Version **3.10.0** verwendet.
 Um das Projekt ausführen zu können, muss das Projekt zuerst gecloned werden:
 
 ```
->> git clone https://i.imgur.com/joMBvg2.gif
+>> git clone https://github.com/SoerenCollet/Coding-Challenge-Merging-Intervals.git
 >> cd Coding-Challenge-Merging-Intervals/python
 ```
 
@@ -64,7 +64,7 @@ Um den Speicherverbrauch des Programms zu überprüfen, wird das Modul **guppy3*
 
 ***Anmerkung:*** 
 
-**psutil**, welches im angedachten Modul **memory-profiler** verwendet wird, hat aktuell keinen Wheel für um ihn unter Windows mit Python **3.10.0** installieren zu können (siehe: https://issueexplorer.com/issue/giampaolo/psutil/1994). Daher wird die Alternative **guppy3** verwendet.
+**psutil**, welches im angedachten Modul **memory-profiler** verwendet wird, hat aktuell keinen Wheel um es unter Windows mit Python **3.10.0** installieren zu können (siehe: https://issueexplorer.com/issue/giampaolo/psutil/1994). Daher wird die Alternative **guppy3** verwendet.
 
 ## Überlegungen
 
