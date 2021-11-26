@@ -1,4 +1,4 @@
-# Coding-Challenge-Private
+# Coding-Challenge-Merging-Intervals
 
 ## Challenge
 
